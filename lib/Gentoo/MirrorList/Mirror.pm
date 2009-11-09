@@ -1,14 +1,31 @@
-package Gentoo::MirrorList::Mirror;
-
-# ABSTRACT: An objective representation of a single gentoo mirror
-
 use strict;
 use warnings;
+
+package Gentoo::MirrorList::Mirror;
+
+# ABSTRACT: An objective representation of a single Gentoo mirror
+
 use Moose;
 use namespace::autoclean;
 
 my %bools = ();
 my %strs  = ();
+
+=head1 ATTRIBUTES
+
+=head2 country
+
+=head2 countryname
+
+=head2 region
+
+=head2 mirrorname
+
+=head2 uri
+
+=head2 proto
+
+=cut
 
 for (qw(  country countryname region mirrorname uri proto )) {
   has $_ => (
@@ -16,14 +33,57 @@ for (qw(  country countryname region mirrorname uri proto )) {
     is       => 'ro',
     required => 1,
     traits   => [qw( String )],
-    handles  => { $_ . '_match' => 'match' }
+    handles  => { $_ . '_match' => 'match' },
   );
   $strs{$_} = 1;
 }
+
+=head2 ipv4
+
+=head2 ipv6
+
+=head2 partial
+
+=cut
+
 for (qw( ipv4 ipv6 partial )) {
-  has $_ => ( isa => 'Bool', is => 'ro', required => 1 );
+  has $_ => ( isa => 'Bool', is => 'ro', required => 1, );
   $bools{$_} = 1;
 }
+
+=head1 METHODS
+
+=head2 country_match
+
+  ->country_match( 'str' )
+  ->country_match(qr/str/)
+
+=head2 countryname_match
+
+  ->countryname_match( 'str' )
+  ->countryname_match(qr/str/)
+
+=head2 region_match
+
+  ->region_match( 'str' )
+  ->region_match(qr/str/)
+
+=head2 mirrorname_match
+
+  ->mirrorname_match( 'str' )
+  ->mirrornamename_match(qr/str/)
+
+=head2 uri_match
+
+  ->uri_match( 'str' )
+  ->uri_match(qr/str/)
+
+=head2 proto_match
+
+  ->proto_match( 'str' )
+  ->proto_match(qr/str/)
+
+=cut
 
 around BUILDARGS => sub {
   my ( $orig, $class, @args ) = @_;
@@ -32,17 +92,28 @@ around BUILDARGS => sub {
     for my $bool ( keys %bools ) {
       if ( $args[$argno] eq $bool ) {
 
-        if ( $args[ $argno + 1 ] =~ /^Y$/i ) {
+        if ( 'Y' eq uc $args[ $argno + 1 ] ) {
           $args[ $argno + 1 ] = 1;
         }
-        if ( $args[ $argno + 1 ] =~ /^N$/i ) {
-          $args[ $argno + 1 ] = '';
+        if ( 'N' eq uc $args[ $argno + 1 ] ) {
+          $args[ $argno + 1 ] = q();
         }
       }
     }
   }
   return $class->$orig(@args);
 };
+
+=head2 property_match
+
+A Magic Method that matches given properties
+
+  ->property_match( 'mirrorname', 'foo')
+  ->property_match( 'mirrorname', qr/foo/ )
+  ->property_match( 'ipv4', 1 )
+  ->property_match( 'ipv6', 0 )
+
+=cut
 
 sub property_match {
   my ( $self, $property, $value ) = @_;
@@ -62,12 +133,13 @@ sub property_match {
     return ( not( $value xor $self->$property() ) );
   }
   if ( exists $strs{$property} ) {
-    my $sub = $self->can( $property . "_match" );
+    my $sub = $self->can( $property . '_match' );
     return $self->$sub($value);
   }
 }
 
 __PACKAGE__->meta->make_immutable;
+no Moose;
 
 1;
 

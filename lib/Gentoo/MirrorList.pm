@@ -1,9 +1,10 @@
+use strict;
+use warnings;
+
 package Gentoo::MirrorList;
 
 # ABSTRACT: A programmatic way to access Gentoo.org Mirror Metadata
 
-use strict;
-use warnings;
 use Moose;
 use App::Cache;
 use namespace::autoclean;
@@ -18,9 +19,6 @@ use Gentoo::MirrorList::Mirror;
   my @australian_names = Gentoo::MirrorList->country('AU')->mirrorname_list;
 
 
-=cut
-
-=head1
 =cut
 
 has _cache => (
@@ -123,6 +121,7 @@ sub _filter {
       )
     ]
   );
+  return $self;
 }
 
 sub _unfilter {
@@ -136,13 +135,14 @@ sub _unfilter {
       )
     ]
   );
+  return $self;
 }
 
 =head1 METHODS
 
 =head2 Explicit Filters.
 
-All of the following self-filter the dataset they are on.
+All of the following self-filter the data set they are on.
 
   my $x = Gentoo::MirrorList->FILTER
   my $y = Gentoo::MirrorList->new()
@@ -379,7 +379,7 @@ On filtered objects, the filtration that has been performed affects the output.
 =cut
 
 sub random {
-  my ( $self, $amt ) = (@_);
+  my ( $self, $amt ) = @_;
   $self = $self->new() unless ref $self;
   $amt  = 1            unless defined $amt;
   my (@out) = $self->_data_shuffle;
@@ -405,5 +405,7 @@ sub all {
 }
 
 __PACKAGE__->meta->make_immutable;
+no Moose;
+
 1;
 
