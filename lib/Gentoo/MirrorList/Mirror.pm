@@ -136,7 +136,7 @@ sub property_match {
     }
     else {
       my $sub = $self->can( $property . '_match' );
-      return $self->$sub( quotemeta($value) );
+      return $self->$sub($value);
     }
   }
 }
