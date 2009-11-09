@@ -11,11 +11,15 @@ name: Gentoo-MirrorList
 provides:
   Gentoo::MirrorList:
     file: lib/Gentoo/MirrorList.pm
-    version: 0.01000101
+    version: 0.01000102
   Gentoo::MirrorList::Mirror:
     file: lib/Gentoo/MirrorList/Mirror.pm
-    version: 0.01000101
-requires: {}
+    version: 0.01000102
+requires:
+  App::Cache: 0.36
+  Moose: 0.92
+  XML::Simple: 2.18
+  namespace::autoclean: 0.09
 resources:
-  repository: origin
-version: 0.01000101
+  repository: http://github.com/kentfredric/Gentoo-MirrorList
+version: 0.01000102

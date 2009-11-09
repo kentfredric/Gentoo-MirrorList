@@ -13,7 +13,10 @@ my $build = Module::Build->new(
 "Kent\ Fredric\ \<kentnl\@cpan\.org\>",
   ],
   requires      => {
-
+    "namespace::autoclean" => '0.09',
+    "XML::Simple" => '2.18',
+    "App::Cache" => '0.36',
+    "Moose" => '0.92',
   },
   script_files => [ qw() ],
 );

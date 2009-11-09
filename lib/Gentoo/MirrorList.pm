@@ -2,7 +2,7 @@ use strict;
 use warnings;
 
 package Gentoo::MirrorList;
-our $VERSION = '0.01000101';
+our $VERSION = '0.01000102';
 
 
 
@@ -225,7 +225,7 @@ Gentoo::MirrorList - A programmatic way to access Gentoo.org Mirror Metadata
 
 =head1 VERSION
 
-version 0.01000101
+version 0.01000102
 
 =head1 SYNOPSIS
 

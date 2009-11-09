@@ -1,13 +1,13 @@
 {
    "resources" : {
-      "repository" : "origin"
+      "repository" : "http://github.com/kentfredric/Gentoo-MirrorList"
    },
    "generated_by" : "Dist::Zilla version 1.092930",
    "meta-spec" : {
       "version" : 1.4,
       "url" : "http://module-build.sourceforge.net/META-spec-v1.4.html"
    },
-   "version" : "0.01000101",
+   "version" : "0.01000102",
    "name" : "Gentoo-MirrorList",
    "author" : [
       "Kent Fredric <kentnl@cpan.org>"
@@ -15,15 +15,20 @@
    "license" : "perl",
    "provides" : {
       "Gentoo::MirrorList::Mirror" : {
-         "version" : "0.01000101",
+         "version" : "0.01000102",
          "file" : "lib/Gentoo/MirrorList/Mirror.pm"
       },
       "Gentoo::MirrorList" : {
-         "version" : "0.01000101",
+         "version" : "0.01000102",
          "file" : "lib/Gentoo/MirrorList.pm"
       }
    },
-   "requires" : {},
+   "requires" : {
+      "namespace::autoclean" : "0.09",
+      "XML::Simple" : "2.18",
+      "App::Cache" : "0.36",
+      "Moose" : "0.92"
+   },
    "abstract" : "A programmatic way to access Gentoo.org Mirror Metadata"
 }
 
