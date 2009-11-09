@@ -2,7 +2,7 @@ use strict;
 use warnings;
 
 package Gentoo::MirrorList::Mirror;
-our $VERSION = '0.01000102';
+our $VERSION = '0.01000112';
 
 
 
@@ -71,8 +71,15 @@ sub property_match {
     return ( not( $value xor $self->$property() ) );
   }
   if ( exists $strs{$property} ) {
-    my $sub = $self->can( $property . '_match' );
-    return $self->$sub($value);
+    if ( ref $value ne 'REGEX' ) {
+      my $sub = $self->can($property);
+
+      return $self->$sub() eq $value;
+    }
+    else {
+      my $sub = $self->can( $property . '_match' );
+      return $self->$sub($value);
+    }
   }
 }
 
@@ -91,7 +98,7 @@ Gentoo::MirrorList::Mirror - An objective representation of a single Gentoo mirr
 
 =head1 VERSION
 
-version 0.01000102
+version 0.01000112
 
 =head1 ATTRIBUTES
 
@@ -107,20 +114,11 @@ version 0.01000102
 
 =head2 proto
 
-=cut
-
-=pod
-
-
 =head2 ipv4
 
 =head2 ipv6
 
 =head2 partial
-
-=cut
-
-=pod
 
 =head1 METHODS
 
@@ -154,23 +152,18 @@ version 0.01000102
   ->proto_match( 'str' )
   ->proto_match(qr/str/)
 
-=cut
-
-=pod
-
-
 =head2 property_match
 
 A Magic Method that matches given properties
 
-  ->property_match( 'mirrorname', 'foo')
-  ->property_match( 'mirrorname', qr/foo/ )
-  ->property_match( 'ipv4', 1 )
-  ->property_match( 'ipv6', 0 )
+  ->property_match( 'mirrorname', 'foo')    # mirrorname eq foo
+  ->property_match( 'mirrorname', qr/foo/ ) # mirrorname =~ qr/foo/
+  ->property_match( 'ipv4', 1 )             # not ( 0 xor ipv4 )
+  ->property_match( 'ipv6', 0 )             # not ( 0 xor ipv6 )
 
 =head1 AUTHOR
 
-Kent Fredric <kentnl@cpan.org>
+  Kent Fredric <kentnl@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 

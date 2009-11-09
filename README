@@ -3,7 +3,7 @@ NAME
     Metadata
 
 VERSION
-    version 0.01000102
+    version 0.01000112
 
 SYNOPSIS
       my @mirrors = Gentoo::MirrorList->region('North America')->country('CA')->ipv4->all;
@@ -24,7 +24,7 @@ DESCRIPTION
     stored in ~/.gentoo_mirrorlist/cache/
 
 METHODS
-  Explicit Filters.
+  FILTER METHODS
     All of the following self-filter the data set they are on.
 
       my $x = Gentoo::MirrorList->FILTER
@@ -33,131 +33,13 @@ METHODS
 
     x and y will be the same. y and z will be the same object.
 
-   country
-      ..->country( 'AU' )->..
-      ..->country( qr/AU/ )->..
-
-    See also "country_list"
-
-   countryname
-      ..->countryname( 'Australia' )->..
-      ..->countryname( qr/Aus/ )->..
-
-    See also "countryname_list"
-
-   region
-      ..->region('North America')->..
-      ..->region(qr/America/)->..
-
-    See also "region_list"
-
-   mirrorname
-      ..->mirrorname(qr/^a/i)->..
-
-    See also "mirrorname_list"
-
-   uri
-      ..->uri(qr/gentoo/)->..
-
-    See also "uri_list"
-
-   proto
-      ..->proto('http')->..
-      ..->proto(qr/^.*tp$/)->..
-
-    See also "proto_list"
-
-   ipv4
-      ..->ipv4( 1 )->..
-      ..->ipv4( 0 )->..
-
-   ipv6
-      ..->ipv6( 1 )->..
-      ..->ipv6( 0 )->..
-
-   partial
-      ..->partial( 1 )->..
-      ..->partial( 0 )->..
-
-   exclude_country
-      ..->exclude_country(qr/^K/i)->..
-      ..->exclude_country('AU')->..
-
-    See also "country_list"
-
-   exclude_countryname
-      ..->exclude_countryname(qr/America/i)->..
-      ..->exclude_countryname('Australia')->..
-
-    See also "countryname_list"
-
-   exclude_region
-      ..->exclude_region(qr/Foo/)->..
-      ..->exclude_region('Foo')->..
-
-    See also "region_list"
-
-   exclude_mirrorname
-      ..->exclude_mirrorname(qr/Bad/)->..
-      ..->exclude_mirrorname('Bad')->..
-
-    See also "mirrorname_list"
-
-   exclude_uri
-      ..->exclude_uri(qr/Bad\.ip/)->..
-      ..->exclude_uri('Bad.ip')->..
-
-    See also "uri_list"
-
-   exclude_proto
-      ..->exclude_proto(qr/sync/)->..
-      ..->exclude_proto('rsync')->..
-
-    See also "proto_list"
-
-   is_ipv4
-      ..->is_ipv4->..
-
-   not_ipv4
-      ..->not_ipv4->..
-
-   is_ipv6
-      ..->is_ipv6->..
-
-   not_ipv6
-      ..->not_ipv6->..
-
-   is_partial
-      ..->is_partial->..
-
-   not_partial
-      ..->not_partial->..
-
-  Terminating List
+  TERMINATOR LIST METHODS
     If called directly on Gentoo::MirrorList will return all data possible.
 
     If called on an object that has been filtered, only shows the data that
     is applicable.
 
-   country_list
-      my ( @foo ) = ...->country_list
-
-   countryname_list
-      my ( @foo ) = ...->countryname_list
-
-   region_list
-      my ( @foo ) = ...->region_list
-
-   mirrorname_list
-      my ( @foo ) = ...->mirrorname_list
-
-   uri_list
-      my ( @foo ) = ...->uri_list
-
-   proto_list
-      my ( @foo ) = ...->proto_list
-
-  Mirror Selectors
+  MIRROR LIST METHODS
     The following methods will return one or more Gentoo::MirrorList::Mirror
     objects,
 
@@ -167,17 +49,149 @@ METHODS
     On filtered objects, the filtration that has been performed affects the
     output.
 
-   random
+FILTER METHODS
+  country
+      ..->country( 'AU' )->..
+      ..->country( qr/AU/ )->..
+
+    See also "country_list"
+
+  countryname
+      ..->countryname( 'Australia' )->..
+      ..->countryname( qr/Aus/ )->..
+
+    See also "countryname_list"
+
+  region
+      ..->region('North America')->..
+      ..->region(qr/America/)->..
+
+    See also "region_list"
+
+  mirrorname
+      ..->mirrorname(qr/^a/i)->..
+
+    See also "mirrorname_list"
+
+  uri
+      ..->uri(qr/gentoo/)->..
+
+    See also "uri_list"
+
+  proto
+      ..->proto('http')->..
+      ..->proto(qr/^.*tp$/)->..
+
+    See also "proto_list"
+
+  ipv4
+      ..->ipv4( 1 )->..
+      ..->ipv4( 0 )->..
+
+  ipv6
+      ..->ipv6( 1 )->..
+      ..->ipv6( 0 )->..
+
+  partial
+      ..->partial( 1 )->..
+      ..->partial( 0 )->..
+
+  exclude_country
+      ..->exclude_country(qr/^K/i)->..
+      ..->exclude_country('AU')->..
+
+    See also "country_list"
+
+  exclude_countryname
+      ..->exclude_countryname(qr/America/i)->..
+      ..->exclude_countryname('Australia')->..
+
+    See also "countryname_list"
+
+  exclude_region
+      ..->exclude_region(qr/Foo/)->..
+      ..->exclude_region('Foo')->..
+
+    See also "region_list"
+
+  exclude_mirrorname
+      ..->exclude_mirrorname(qr/Bad/)->..
+      ..->exclude_mirrorname('Bad')->..
+
+    See also "mirrorname_list"
+
+  exclude_uri
+      ..->exclude_uri(qr/Bad\.ip/)->..
+      ..->exclude_uri('Bad.ip')->..
+
+    See also "uri_list"
+
+  exclude_proto
+      ..->exclude_proto(qr/sync/)->..
+      ..->exclude_proto('rsync')->..
+
+    See also "proto_list"
+
+  is_ipv4
+      ..->is_ipv4->..
+
+  not_ipv4
+      ..->not_ipv4->..
+
+  is_ipv6
+      ..->is_ipv6->..
+
+  not_ipv6
+      ..->not_ipv6->..
+
+  is_partial
+      ..->is_partial->..
+
+  not_partial
+      ..->not_partial->..
+
+TERMINATOR LIST METHODS
+  country_list
+      my ( @foo ) = ...->country_list
+
+  countryname_list
+      my ( @foo ) = ...->countryname_list
+
+  region_list
+      my ( @foo ) = ...->region_list
+
+  mirrorname_list
+      my ( @foo ) = ...->mirrorname_list
+
+  uri_list
+      my ( @foo ) = ...->uri_list
+
+  proto_list
+      my ( @foo ) = ...->proto_list
+
+MIRROR LIST METHODS
+  random
       my ( $mirror )  = ...->random()
       my ( @mirrors ) = ...->random( 10 );
 
-   all
+  all
     returns all Mirrors in the current filtration.
 
     There is no explicit sort order, but it will likely resemble parse order
 
+PRIVATE ATTRIBUTES
+  _cache
+  _data
+  _xml
+PRIVATE METHODS
+  _normalise_mirrorgroup
+  __build_mirrorgroup
+  _build_data
+  _build__xml
+  _filter
+  _unfilter
 AUTHOR
-    Kent Fredric <kentnl@cpan.org>
+      Kent Fredric <kentnl@cpan.org>
 
 COPYRIGHT AND LICENSE
     This software is copyright (c) 2009 by Kent Fredric.

@@ -13,6 +13,7 @@ my $build = Module::Build->new(
 "Kent\ Fredric\ \<kentnl\@cpan\.org\>",
   ],
   requires      => {
+    "Test::More" => '0.94',
     "namespace::autoclean" => '0.09',
     "XML::Simple" => '2.18',
     "App::Cache" => '0.36',

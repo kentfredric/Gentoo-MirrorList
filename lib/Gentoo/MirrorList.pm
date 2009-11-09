@@ -2,7 +2,7 @@ use strict;
 use warnings;
 
 package Gentoo::MirrorList;
-our $VERSION = '0.01000102';
+our $VERSION = '0.01000112';
 
 
 
@@ -15,6 +15,8 @@ use Gentoo::MirrorList::Mirror;
 
 
 
+
+
 has _cache => (
   isa     => 'App::Cache',
   is      => 'ro',
@@ -24,6 +26,7 @@ has _cache => (
   },
 );
 
+
 has '_data' => (
   isa        => 'ArrayRef[ Gentoo::MirrorList::Mirror ]',
   is         => 'rw',
@@ -32,11 +35,13 @@ has '_data' => (
   handles    => { _data_filter => 'grep', _data_iterate => 'map', _data_count => 'count', _data_shuffle => 'shuffle' },
 );
 
+
 has '_xml' => (
   isa        => 'Str',
   is         => 'ro',
   lazy_build => 1,
 );
+
 
 sub _normalise_mirrorgroup {
   my ( $self, $mirrorgroup ) = @_;
@@ -51,6 +56,7 @@ sub _normalise_mirrorgroup {
   return $mirrorgroup;
 }
 
+
 sub __build_mirrorgroup {
   my ( $self, $mirrorgroup ) = @_;
   $mirrorgroup = $self->_normalise_mirrorgroup($mirrorgroup);
@@ -60,11 +66,10 @@ sub __build_mirrorgroup {
     countryname => $mirrorgroup->{countryname},
     region      => $mirrorgroup->{region},
   );
-
   for my $mirrorname ( keys %{ $mirrorgroup->{mirror} } ) {
+
     for my $uri ( @{ $mirrorgroup->{mirror}->{$mirrorname}->{uri} } ) {
-      push @mirrors,
-        Gentoo::MirrorList::Mirror->new(
+      my $i = Gentoo::MirrorList::Mirror->new(
         %data,
         mirrorname => $mirrorname,
         uri        => $uri->{content},
@@ -72,12 +77,14 @@ sub __build_mirrorgroup {
         ipv4       => $uri->{ipv4},
         ipv6       => $uri->{ipv6},
         partial    => $uri->{partial},
-        );
+      );
+      push @mirrors, $i;
 
     }
   }
   return (@mirrors);
 }
+
 
 sub _build__data {
   my ($self) = @_;
@@ -99,10 +106,12 @@ sub _build__data {
   return \@rows;
 }
 
+
 sub _build__xml {
   my ($self) = @_;
   return $self->_cache->get_url('http://www.gentoo.org/main/en/mirrors3.xml');
 }
+
 
 sub _filter {
   my ( $self, $property, $param ) = @_;
@@ -117,6 +126,7 @@ sub _filter {
   );
   return $self;
 }
+
 
 sub _unfilter {
   my ( $self, $property, $param ) = @_;
@@ -200,7 +210,7 @@ sub random {
     push @out, map { $self->_data_shuffle } 0 .. int( ( $amt - $self->_data_count ) / $self->_data_count + 1 );
   }
   return $out[0] if $amt == 1;
-  return @out[ 0 .. $amt ];
+  return @out[ 0 .. $amt - 1 ];
 }
 
 
@@ -225,7 +235,7 @@ Gentoo::MirrorList - A programmatic way to access Gentoo.org Mirror Metadata
 
 =head1 VERSION
 
-version 0.01000102
+version 0.01000112
 
 =head1 SYNOPSIS
 
@@ -234,10 +244,6 @@ version 0.01000102
   my $mirror = Gentoo::MirrorList->region('Australia')->ipv4->random();
   my @all_names = Gentoo::MirrorList->mirrorname_list
   my @australian_names = Gentoo::MirrorList->country('AU')->mirrorname_list;
-
-=cut
-
-=pod
 
 =head1 DESCRIPTION
 
@@ -248,13 +254,9 @@ defined below to find, via code, any mirror that meets a given criteria.
 For efficiency, this module uses L<App::Cache> to cache both the mirror list and the parsed representation of that list,
 and the data files are stored in ~/.gentoo_mirrorlist/cache/
 
-=cut
-
-=pod
-
 =head1 METHODS
 
-=head2 Explicit Filters.
+=head2 FILTER METHODS
 
 All of the following self-filter the data set they are on.
 
@@ -264,178 +266,13 @@ All of the following self-filter the data set they are on.
 
 x and y will be the same. y and z will be the same object.
 
-=head3 country
-
-  ..->country( 'AU' )->..
-  ..->country( qr/AU/ )->..
-
-See also L</country_list>
-
-=head3 countryname
-
-  ..->countryname( 'Australia' )->..
-  ..->countryname( qr/Aus/ )->..
-
-See also L</countryname_list>
-
-=head3 region
-
-  ..->region('North America')->..
-  ..->region(qr/America/)->..
-
-See also L</region_list>
-
-=head3 mirrorname
-
-  ..->mirrorname(qr/^a/i)->..
-
-See also L</mirrorname_list>
-
-=head3 uri
-
-  ..->uri(qr/gentoo/)->..
-
-See also L</uri_list>
-
-=head3 proto
-
-  ..->proto('http')->..
-  ..->proto(qr/^.*tp$/)->..
-
-See also L</proto_list>
-
-=head3 ipv4
-
-  ..->ipv4( 1 )->..
-  ..->ipv4( 0 )->..
-
-=head3 ipv6
-
-  ..->ipv6( 1 )->..
-  ..->ipv6( 0 )->..
-
-=head3 partial
-
-  ..->partial( 1 )->..
-  ..->partial( 0 )->..
-
-=cut
-
-=pod
-
-
-=head3 exclude_country
-
-  ..->exclude_country(qr/^K/i)->..
-  ..->exclude_country('AU')->..
-
-See also L</country_list>
-
-=head3 exclude_countryname
-
-  ..->exclude_countryname(qr/America/i)->..
-  ..->exclude_countryname('Australia')->..
-
-See also L</countryname_list>
-
-=head3 exclude_region
-
-  ..->exclude_region(qr/Foo/)->..
-  ..->exclude_region('Foo')->..
-
-See also L</region_list>
-
-=head3 exclude_mirrorname
-
-  ..->exclude_mirrorname(qr/Bad/)->..
-  ..->exclude_mirrorname('Bad')->..
-
-See also L</mirrorname_list>
-
-=head3 exclude_uri
-
-  ..->exclude_uri(qr/Bad\.ip/)->..
-  ..->exclude_uri('Bad.ip')->..
-
-See also L</uri_list>
-
-=head3 exclude_proto
-
-  ..->exclude_proto(qr/sync/)->..
-  ..->exclude_proto('rsync')->..
-
-See also L</proto_list>
-
-=cut
-
-=pod
-
-
-=head3 is_ipv4
-
-  ..->is_ipv4->..
-
-=head3 not_ipv4
-
-  ..->not_ipv4->..
-
-=head3 is_ipv6
-
-  ..->is_ipv6->..
-
-=head3 not_ipv6
-
-  ..->not_ipv6->..
-
-=head3 is_partial
-
-  ..->is_partial->..
-
-=head3 not_partial
-
-  ..->not_partial->..
-
-=cut
-
-=pod
-
-
-=head2 Terminating List
+=head2 TERMINATOR LIST METHODS
 
 If called directly on L<Gentoo::MirrorList> will return all data possible.
 
 If called on an object that has been filtered, only shows the data that is applicable.
 
-=head3 country_list
-
-  my ( @foo ) = ...->country_list
-
-=head3 countryname_list
-
-  my ( @foo ) = ...->countryname_list
-
-=head3 region_list
-
-  my ( @foo ) = ...->region_list
-
-=head3 mirrorname_list
-
-  my ( @foo ) = ...->mirrorname_list
-
-=head3 uri_list
-
-  my ( @foo ) = ...->uri_list
-
-=head3 proto_list
-
-  my ( @foo ) = ...->proto_list
-
-=cut
-
-=pod
-
-
-=head2 Mirror Selectors
+=head2 MIRROR LIST METHODS
 
 The following methods will return one or more L<Gentoo::MirrorList::Mirror> objects,
 
@@ -443,25 +280,193 @@ They can be called directly on L<Gentoo::MirrorList> or on filtered objects.
 
 On filtered objects, the filtration that has been performed affects the output.
 
-=head3 random
+=head1 FILTER METHODS
+
+=head2 country
+
+  ..->country( 'AU' )->..
+  ..->country( qr/AU/ )->..
+
+See also L</country_list>
+
+=head2 countryname
+
+  ..->countryname( 'Australia' )->..
+  ..->countryname( qr/Aus/ )->..
+
+See also L</countryname_list>
+
+=head2 region
+
+  ..->region('North America')->..
+  ..->region(qr/America/)->..
+
+See also L</region_list>
+
+=head2 mirrorname
+
+  ..->mirrorname(qr/^a/i)->..
+
+See also L</mirrorname_list>
+
+=head2 uri
+
+  ..->uri(qr/gentoo/)->..
+
+See also L</uri_list>
+
+=head2 proto
+
+  ..->proto('http')->..
+  ..->proto(qr/^.*tp$/)->..
+
+See also L</proto_list>
+
+=head2 ipv4
+
+  ..->ipv4( 1 )->..
+  ..->ipv4( 0 )->..
+
+=head2 ipv6
+
+  ..->ipv6( 1 )->..
+  ..->ipv6( 0 )->..
+
+=head2 partial
+
+  ..->partial( 1 )->..
+  ..->partial( 0 )->..
+
+=head2 exclude_country
+
+  ..->exclude_country(qr/^K/i)->..
+  ..->exclude_country('AU')->..
+
+See also L</country_list>
+
+=head2 exclude_countryname
+
+  ..->exclude_countryname(qr/America/i)->..
+  ..->exclude_countryname('Australia')->..
+
+See also L</countryname_list>
+
+=head2 exclude_region
+
+  ..->exclude_region(qr/Foo/)->..
+  ..->exclude_region('Foo')->..
+
+See also L</region_list>
+
+=head2 exclude_mirrorname
+
+  ..->exclude_mirrorname(qr/Bad/)->..
+  ..->exclude_mirrorname('Bad')->..
+
+See also L</mirrorname_list>
+
+=head2 exclude_uri
+
+  ..->exclude_uri(qr/Bad\.ip/)->..
+  ..->exclude_uri('Bad.ip')->..
+
+See also L</uri_list>
+
+=head2 exclude_proto
+
+  ..->exclude_proto(qr/sync/)->..
+  ..->exclude_proto('rsync')->..
+
+See also L</proto_list>
+
+=head2 is_ipv4
+
+  ..->is_ipv4->..
+
+=head2 not_ipv4
+
+  ..->not_ipv4->..
+
+=head2 is_ipv6
+
+  ..->is_ipv6->..
+
+=head2 not_ipv6
+
+  ..->not_ipv6->..
+
+=head2 is_partial
+
+  ..->is_partial->..
+
+=head2 not_partial
+
+  ..->not_partial->..
+
+=head1 TERMINATOR LIST METHODS
+
+=head2 country_list
+
+  my ( @foo ) = ...->country_list
+
+=head2 countryname_list
+
+  my ( @foo ) = ...->countryname_list
+
+=head2 region_list
+
+  my ( @foo ) = ...->region_list
+
+=head2 mirrorname_list
+
+  my ( @foo ) = ...->mirrorname_list
+
+=head2 uri_list
+
+  my ( @foo ) = ...->uri_list
+
+=head2 proto_list
+
+  my ( @foo ) = ...->proto_list
+
+=head1 MIRROR LIST METHODS
+
+=head2 random
 
   my ( $mirror )  = ...->random()
   my ( @mirrors ) = ...->random( 10 );
 
-=cut
-
-=pod
-
-
-=head3 all
+=head2 all
 
 returns all Mirrors in the current filtration.
 
 There is no explicit sort order, but it will likely resemble parse order
 
+=head1 PRIVATE ATTRIBUTES
+
+=head2 _cache
+
+=head2 _data
+
+=head2 _xml
+
+=head1 PRIVATE METHODS
+
+=head2 _normalise_mirrorgroup
+
+=head2 __build_mirrorgroup
+
+=head2 _build_data
+
+=head2 _build__xml
+
+=head2 _filter
+
+=head2 _unfilter
+
 =head1 AUTHOR
 
-Kent Fredric <kentnl@cpan.org>
+  Kent Fredric <kentnl@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 

@@ -1,5 +1,10 @@
 Revision history for Gentoo-MirrorList
 
+0.01000112 2009-11-09 15:29:43 UTC
+          Redocumented With Pod::Weaver
+          Add Tests. 
+          Fixed MirrorList filters using regex processing.
+
 0.01000102 2009-11-09 05:03:10 UTC
           Added some dependencies. 
             Me-- / Dzil++ # its too easy to make a working dist without thinking

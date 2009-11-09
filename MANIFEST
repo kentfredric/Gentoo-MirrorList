@@ -11,8 +11,12 @@ lib/Gentoo/MirrorList.pm
 lib/Gentoo/MirrorList/Mirror.pm
 perlcriticrc
 t/00-compile.t
+t/01_simple.t
 t/author-critic.t
 t/author-kwalitee.t
+t/files/mirrors3.xml
+t/lib/App/Cache/Test.pm
 t/release-meta-yaml.t
 t/release-pod-coverage.t
 t/release-pod-syntax.t
+weaver.ini
