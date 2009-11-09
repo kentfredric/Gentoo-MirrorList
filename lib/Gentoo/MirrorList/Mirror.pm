@@ -11,19 +11,18 @@ use namespace::autoclean;
 my %bools = ();
 my %strs  = ();
 
-=head1 ATTRIBUTES
 
-=head2 country
+=attr country
 
-=head2 countryname
+=attr countryname
 
-=head2 region
+=attr region
 
-=head2 mirrorname
+=attr mirrorname
 
-=head2 uri
+=attr uri
 
-=head2 proto
+=attr proto
 
 =cut
 
@@ -38,11 +37,11 @@ for (qw(  country countryname region mirrorname uri proto )) {
   $strs{$_} = 1;
 }
 
-=head2 ipv4
+=attr ipv4
 
-=head2 ipv6
+=attr ipv6
 
-=head2 partial
+=attr partial
 
 =cut
 
@@ -51,34 +50,32 @@ for (qw( ipv4 ipv6 partial )) {
   $bools{$_} = 1;
 }
 
-=head1 METHODS
-
-=head2 country_match
+=method country_match
 
   ->country_match( 'str' )
   ->country_match(qr/str/)
 
-=head2 countryname_match
+=method countryname_match
 
   ->countryname_match( 'str' )
   ->countryname_match(qr/str/)
 
-=head2 region_match
+=method region_match
 
   ->region_match( 'str' )
   ->region_match(qr/str/)
 
-=head2 mirrorname_match
+=method mirrorname_match
 
   ->mirrorname_match( 'str' )
   ->mirrornamename_match(qr/str/)
 
-=head2 uri_match
+=method uri_match
 
   ->uri_match( 'str' )
   ->uri_match(qr/str/)
 
-=head2 proto_match
+=method proto_match
 
   ->proto_match( 'str' )
   ->proto_match(qr/str/)
@@ -104,7 +101,7 @@ around BUILDARGS => sub {
   return $class->$orig(@args);
 };
 
-=head2 property_match
+=method property_match
 
 A Magic Method that matches given properties
 

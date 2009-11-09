@@ -32,6 +32,38 @@ and the data files are stored in ~/.gentoo_mirrorlist/cache/
 
 =cut
 
+=head1 METHODS
+
+=head2 FILTER METHODS
+
+All of the following self-filter the data set they are on.
+
+  my $x = Gentoo::MirrorList->FILTER
+  my $y = Gentoo::MirrorList->new()
+  my $z = $y->FILTER
+
+x and y will be the same. y and z will be the same object.
+
+=head2 TERMINATOR LIST METHODS
+
+If called directly on L<Gentoo::MirrorList> will return all data possible.
+
+If called on an object that has been filtered, only shows the data that is applicable.
+
+=head2 MIRROR LIST METHODS
+
+The following methods will return one or more L<Gentoo::MirrorList::Mirror> objects,
+
+They can be called directly on L<Gentoo::MirrorList> or on filtered objects.
+
+On filtered objects, the filtration that has been performed affects the output.
+
+=cut
+
+=p_attr _cache
+
+=cut
+
 has _cache => (
   isa     => 'App::Cache',
   is      => 'ro',
@@ -41,6 +73,10 @@ has _cache => (
   },
 );
 
+=p_attr _data
+
+=cut
+
 has '_data' => (
   isa        => 'ArrayRef[ Gentoo::MirrorList::Mirror ]',
   is         => 'rw',
@@ -49,11 +85,19 @@ has '_data' => (
   handles    => { _data_filter => 'grep', _data_iterate => 'map', _data_count => 'count', _data_shuffle => 'shuffle' },
 );
 
+=p_attr _xml
+
+=cut
+
 has '_xml' => (
   isa        => 'Str',
   is         => 'ro',
   lazy_build => 1,
 );
+
+=p_method _normalise_mirrorgroup
+
+=cut
 
 sub _normalise_mirrorgroup {
   my ( $self, $mirrorgroup ) = @_;
@@ -67,6 +111,10 @@ sub _normalise_mirrorgroup {
   }
   return $mirrorgroup;
 }
+
+=p_method __build_mirrorgroup
+
+=cut
 
 sub __build_mirrorgroup {
   my ( $self, $mirrorgroup ) = @_;
@@ -96,6 +144,10 @@ sub __build_mirrorgroup {
   return (@mirrors);
 }
 
+=p_method _build_data
+
+=cut
+
 sub _build__data {
   my ($self) = @_;
 
@@ -116,10 +168,18 @@ sub _build__data {
   return \@rows;
 }
 
+=p_method _build__xml
+
+=cut
+
 sub _build__xml {
   my ($self) = @_;
   return $self->_cache->get_url('http://www.gentoo.org/main/en/mirrors3.xml');
 }
+
+=p_method _filter
+
+=cut
 
 sub _filter {
   my ( $self, $property, $param ) = @_;
@@ -135,6 +195,10 @@ sub _filter {
   return $self;
 }
 
+=p_method _unfilter
+
+=cut
+
 sub _unfilter {
   my ( $self, $property, $param ) = @_;
   $self->_data(
@@ -149,69 +213,59 @@ sub _unfilter {
   return $self;
 }
 
-=head1 METHODS
 
-=head2 Explicit Filters.
 
-All of the following self-filter the data set they are on.
-
-  my $x = Gentoo::MirrorList->FILTER
-  my $y = Gentoo::MirrorList->new()
-  my $z = $y->FILTER
-
-x and y will be the same. y and z will be the same object.
-
-=head3 country
+=filter country
 
   ..->country( 'AU' )->..
   ..->country( qr/AU/ )->..
 
 See also L</country_list>
 
-=head3 countryname
+=filter countryname
 
   ..->countryname( 'Australia' )->..
   ..->countryname( qr/Aus/ )->..
 
 See also L</countryname_list>
 
-=head3 region
+=filter region
 
   ..->region('North America')->..
   ..->region(qr/America/)->..
 
 See also L</region_list>
 
-=head3 mirrorname
+=filter mirrorname
 
   ..->mirrorname(qr/^a/i)->..
 
 See also L</mirrorname_list>
 
-=head3 uri
+=filter uri
 
   ..->uri(qr/gentoo/)->..
 
 See also L</uri_list>
 
-=head3 proto
+=filter proto
 
   ..->proto('http')->..
   ..->proto(qr/^.*tp$/)->..
 
 See also L</proto_list>
 
-=head3 ipv4
+=filter ipv4
 
   ..->ipv4( 1 )->..
   ..->ipv4( 0 )->..
 
-=head3 ipv6
+=filter ipv6
 
   ..->ipv6( 1 )->..
   ..->ipv6( 0 )->..
 
-=head3 partial
+=filter partial
 
   ..->partial( 1 )->..
   ..->partial( 0 )->..
@@ -229,42 +283,42 @@ for my $property (qw( country countryname region mirrorname uri proto ipv4 ipv6 
   );
 }
 
-=head3 exclude_country
+=filter exclude_country
 
   ..->exclude_country(qr/^K/i)->..
   ..->exclude_country('AU')->..
 
 See also L</country_list>
 
-=head3 exclude_countryname
+=filter exclude_countryname
 
   ..->exclude_countryname(qr/America/i)->..
   ..->exclude_countryname('Australia')->..
 
 See also L</countryname_list>
 
-=head3 exclude_region
+=filter exclude_region
 
   ..->exclude_region(qr/Foo/)->..
   ..->exclude_region('Foo')->..
 
 See also L</region_list>
 
-=head3 exclude_mirrorname
+=filter exclude_mirrorname
 
   ..->exclude_mirrorname(qr/Bad/)->..
   ..->exclude_mirrorname('Bad')->..
 
 See also L</mirrorname_list>
 
-=head3 exclude_uri
+=filter exclude_uri
 
   ..->exclude_uri(qr/Bad\.ip/)->..
   ..->exclude_uri('Bad.ip')->..
 
 See also L</uri_list>
 
-=head3 exclude_proto
+=filter exclude_proto
 
   ..->exclude_proto(qr/sync/)->..
   ..->exclude_proto('rsync')->..
@@ -284,27 +338,27 @@ for my $property (qw( country countryname region mirrorname uri proto )) {
   );
 }
 
-=head3 is_ipv4
+=filter is_ipv4
 
   ..->is_ipv4->..
 
-=head3 not_ipv4
+=filter not_ipv4
 
   ..->not_ipv4->..
 
-=head3 is_ipv6
+=filter is_ipv6
 
   ..->is_ipv6->..
 
-=head3 not_ipv6
+=filter not_ipv6
 
   ..->not_ipv6->..
 
-=head3 is_partial
+=filter is_partial
 
   ..->is_partial->..
 
-=head3 not_partial
+=filter not_partial
 
   ..->not_partial->..
 
@@ -329,33 +383,28 @@ for my $property (qw( ipv4 ipv6 partial )) {
   );
 }
 
-=head2 Terminating List
 
-If called directly on L<Gentoo::MirrorList> will return all data possible.
-
-If called on an object that has been filtered, only shows the data that is applicable.
-
-=head3 country_list
+=terminator country_list
 
   my ( @foo ) = ...->country_list
 
-=head3 countryname_list
+=terminator countryname_list
 
   my ( @foo ) = ...->countryname_list
 
-=head3 region_list
+=terminator region_list
 
   my ( @foo ) = ...->region_list
 
-=head3 mirrorname_list
+=terminator mirrorname_list
 
   my ( @foo ) = ...->mirrorname_list
 
-=head3 uri_list
+=terminator uri_list
 
   my ( @foo ) = ...->uri_list
 
-=head3 proto_list
+=terminator proto_list
 
   my ( @foo ) = ...->proto_list
 
@@ -374,15 +423,7 @@ for my $property (qw( country countryname region mirrorname uri proto )) {
   );
 }
 
-=head2 Mirror Selectors
-
-The following methods will return one or more L<Gentoo::MirrorList::Mirror> objects,
-
-They can be called directly on L<Gentoo::MirrorList> or on filtered objects.
-
-On filtered objects, the filtration that has been performed affects the output.
-
-=head3 random
+=mirrorlist random
 
   my ( $mirror )  = ...->random()
   my ( @mirrors ) = ...->random( 10 );
@@ -401,7 +442,7 @@ sub random {
   return @out[ 0 .. $amt ];
 }
 
-=head3 all
+=mirrorlist all
 
 returns all Mirrors in the current filtration.
 

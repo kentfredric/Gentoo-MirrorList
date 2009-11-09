@@ -1,6 +1,9 @@
 Revision history for {{$dist->name}}
 
 {{$NEXT}}
+          Redocumented With Pod::Weaver
+
+0.01000102 2009-11-09 05:03:10 UTC
           Added some dependencies. 
             Me-- / Dzil++ # its too easy to make a working dist without thinking
 
