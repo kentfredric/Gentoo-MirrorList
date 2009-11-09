@@ -10,7 +10,6 @@ use App::Cache;
 use namespace::autoclean;
 use Gentoo::MirrorList::Mirror;
 
-
 =head1 SYNOPSIS
 
   my @mirrors = Gentoo::MirrorList->region('North America')->country('CA')->ipv4->all;
@@ -437,7 +436,7 @@ sub random {
     push @out, map { $self->_data_shuffle } 0 .. int( ( $amt - $self->_data_count ) / $self->_data_count + 1 );
   }
   return $out[0] if $amt == 1;
-  return @out[ 0 .. $amt ];
+  return @out[ 0 .. $amt - 1 ];
 }
 
 =mirrorlist all
