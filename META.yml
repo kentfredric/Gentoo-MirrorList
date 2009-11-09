@@ -1,0 +1,21 @@
+---
+abstract: 'A programmatic way to access Gentoo.org Mirror Metadata'
+author:
+  - 'Kent Fredric <kentnl@cpan.org>'
+generated_by: 'Dist::Zilla version 1.092930'
+license: perl
+meta-spec:
+  url: http://module-build.sourceforge.net/META-spec-v1.4.html
+  version: 1.4
+name: Gentoo-MirrorList
+provides:
+  Gentoo::MirrorList:
+    file: lib/Gentoo/MirrorList.pm
+    version: 0.01000101
+  Gentoo::MirrorList::Mirror:
+    file: lib/Gentoo/MirrorList/Mirror.pm
+    version: 0.01000101
+requires: {}
+resources:
+  repository: origin
+version: 0.01000101
