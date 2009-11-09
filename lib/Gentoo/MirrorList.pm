@@ -21,6 +21,17 @@ use Gentoo::MirrorList::Mirror;
 
 =cut
 
+=head1 DESCRIPTION
+
+This module will download the most up-to-date copy of L<http://www.gentoo.org/main/en/mirrors3.xml> and parse it into
+an array of L<Gentoo::MirrorList::Mirror> which you can then filter down progressively using the methods
+defined below to find, via code, any mirror that meets a given criteria.
+
+For efficiency, this module uses L<App::Cache> to cache both the mirror list and the parsed representation of that list,
+and the data files are stored in ~/.gentoo_mirrorlist/cache/
+
+=cut
+
 has _cache => (
   isa     => 'App::Cache',
   is      => 'ro',
