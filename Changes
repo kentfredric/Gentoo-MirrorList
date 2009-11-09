@@ -2,6 +2,8 @@ Revision history for {{$dist->name}}
 
 {{$NEXT}}
           Redocumented With Pod::Weaver
+          Add Tests. 
+          Fixed MirrorList filters using regex processing.
 
 0.01000102 2009-11-09 05:03:10 UTC
           Added some dependencies. 

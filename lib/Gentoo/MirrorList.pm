@@ -10,6 +10,7 @@ use App::Cache;
 use namespace::autoclean;
 use Gentoo::MirrorList::Mirror;
 
+
 =head1 SYNOPSIS
 
   my @mirrors = Gentoo::MirrorList->region('North America')->country('CA')->ipv4->all;
@@ -125,11 +126,10 @@ sub __build_mirrorgroup {
     countryname => $mirrorgroup->{countryname},
     region      => $mirrorgroup->{region},
   );
-
   for my $mirrorname ( keys %{ $mirrorgroup->{mirror} } ) {
+
     for my $uri ( @{ $mirrorgroup->{mirror}->{$mirrorname}->{uri} } ) {
-      push @mirrors,
-        Gentoo::MirrorList::Mirror->new(
+      my $i = Gentoo::MirrorList::Mirror->new(
         %data,
         mirrorname => $mirrorname,
         uri        => $uri->{content},
@@ -137,7 +137,8 @@ sub __build_mirrorgroup {
         ipv4       => $uri->{ipv4},
         ipv6       => $uri->{ipv6},
         partial    => $uri->{partial},
-        );
+      );
+      push @mirrors, $i;
 
     }
   }
@@ -212,8 +213,6 @@ sub _unfilter {
   );
   return $self;
 }
-
-
 
 =filter country
 
@@ -382,7 +381,6 @@ for my $property (qw( ipv4 ipv6 partial )) {
     }
   );
 }
-
 
 =terminator country_list
 

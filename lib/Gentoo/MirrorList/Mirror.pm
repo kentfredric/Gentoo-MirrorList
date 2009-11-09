@@ -11,7 +11,6 @@ use namespace::autoclean;
 my %bools = ();
 my %strs  = ();
 
-
 =attr country
 
 =attr countryname
@@ -105,10 +104,10 @@ around BUILDARGS => sub {
 
 A Magic Method that matches given properties
 
-  ->property_match( 'mirrorname', 'foo')
-  ->property_match( 'mirrorname', qr/foo/ )
-  ->property_match( 'ipv4', 1 )
-  ->property_match( 'ipv6', 0 )
+  ->property_match( 'mirrorname', 'foo')    # mirrorname eq foo
+  ->property_match( 'mirrorname', qr/foo/ ) # mirrorname =~ qr/foo/
+  ->property_match( 'ipv4', 1 )             # not ( 0 xor ipv4 )
+  ->property_match( 'ipv6', 0 )             # not ( 0 xor ipv6 )
 
 =cut
 
@@ -130,8 +129,15 @@ sub property_match {
     return ( not( $value xor $self->$property() ) );
   }
   if ( exists $strs{$property} ) {
-    my $sub = $self->can( $property . '_match' );
-    return $self->$sub($value);
+    if ( ref $value ne 'REGEX' ) {
+      my $sub = $self->can($property);
+
+      return $self->$sub() eq $value;
+    }
+    else {
+      my $sub = $self->can( $property . '_match' );
+      return $self->$sub( quotemeta($value) );
+    }
   }
 }
 
