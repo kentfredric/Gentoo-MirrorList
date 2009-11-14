@@ -18,7 +18,6 @@ sub ml {
   return Gentoo::MirrorList->new( _cache => $cache );
 }
 
-use Data::Dump qw( dump );
 my $t;
 
 my @countries    = @{ ml->country_list };

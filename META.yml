@@ -2,7 +2,11 @@
 abstract: 'A programmatic way to access Gentoo.org Mirror Metadata'
 author:
   - 'Kent Fredric <kentnl@cpan.org>'
-generated_by: 'Dist::Zilla version 1.093000'
+build_requires:
+  Module::Build: 0.35
+configure_requires:
+  Module::Build: 0.35
+generated_by: 'Dist::Zilla version 1.093180'
 license: perl
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html
@@ -11,10 +15,10 @@ name: Gentoo-MirrorList
 provides:
   Gentoo::MirrorList:
     file: lib/Gentoo/MirrorList.pm
-    version: 0.01000112
+    version: 0.01000614
   Gentoo::MirrorList::Mirror:
     file: lib/Gentoo/MirrorList/Mirror.pm
-    version: 0.01000112
+    version: 0.01000614
 requires:
   App::Cache: 0.36
   Moose: 0.92
@@ -23,4 +27,4 @@ requires:
   namespace::autoclean: 0.09
 resources:
   repository: http://github.com/kentfredric/Gentoo-MirrorList
-version: 0.01000112
+version: 0.01000614

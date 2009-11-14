@@ -1,5 +1,10 @@
 Revision history for Gentoo-MirrorList
 
+0.01000614 2009-11-14 17:12:09 UTC
+          Dropped Data::Dump ( was hidden test dep )
+          added Mirror->find
+          no more EUMM
+
 0.01000112 2009-11-09 15:29:43 UTC
           Redocumented With Pod::Weaver
           Add Tests. 

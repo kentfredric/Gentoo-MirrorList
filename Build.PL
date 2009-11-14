@@ -19,6 +19,9 @@ my $build = Module::Build->new(
     "App::Cache" => '0.36',
     "Moose" => '0.92',
   },
+  build_requires      => {
+    "Module::Build" => '0.35',
+  },
   script_files => [ qw() ],
 );
 

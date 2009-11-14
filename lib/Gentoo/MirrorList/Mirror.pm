@@ -2,7 +2,7 @@ use strict;
 use warnings;
 
 package Gentoo::MirrorList::Mirror;
-our $VERSION = '0.01000112';
+our $VERSION = '0.01000614';
 
 
 
@@ -83,6 +83,16 @@ sub property_match {
   }
 }
 
+
+sub file {
+  my ( $self, $file ) = @_;
+  my $uri = $self->uri;
+  $file =~ s{^\/}{};
+  $uri  =~ s{\/$}{};
+
+  return sprintf '%s/%s', $uri, $file;
+}
+
 __PACKAGE__->meta->make_immutable;
 no Moose;
 
@@ -98,7 +108,7 @@ Gentoo::MirrorList::Mirror - An objective representation of a single Gentoo mirr
 
 =head1 VERSION
 
-version 0.01000112
+version 0.01000614
 
 =head1 ATTRIBUTES
 
@@ -160,6 +170,12 @@ A Magic Method that matches given properties
   ->property_match( 'mirrorname', qr/foo/ ) # mirrorname =~ qr/foo/
   ->property_match( 'ipv4', 1 )             # not ( 0 xor ipv4 )
   ->property_match( 'ipv6', 0 )             # not ( 0 xor ipv6 )
+
+=head2 file
+
+Provide a file uri for file.
+
+  ->file('distfiles/QuuxFoo.bar.tar.gz') # http://your.mirror.here/path/to/distfiles/QuuxFoo.bar.tar.gz
 
 =head1 AUTHOR
 
