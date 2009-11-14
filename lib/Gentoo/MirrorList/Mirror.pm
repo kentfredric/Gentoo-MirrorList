@@ -151,8 +151,11 @@ Provide a file uri for file.
 
 sub file {
   my ( $self, $file ) = @_;
+  my $uri = $self->uri;
   $file =~ s{^\/}{};
-  return $self->uri . ( $self->uri =~ qr{\/$} ? '' : '/' ) . $file;
+  $uri  =~ s{\/$}{};
+
+  return sprintf '%s/%s', $uri, $file;
 }
 
 __PACKAGE__->meta->make_immutable;
