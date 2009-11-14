@@ -141,6 +141,20 @@ sub property_match {
   }
 }
 
+=method file
+
+Provide a file uri for file.
+
+  ->file('distfiles/QuuxFoo.bar.tar.gz') # http://your.mirror.here/path/to/distfiles/QuuxFoo.bar.tar.gz
+
+=cut
+
+sub file {
+  my ( $self, $file ) = @_;
+  $file =~ s{^\/}{};
+  return $self->uri . ( $self->uri =~ qr{\/$} ? '' : '/' ) . $file;
+}
+
 __PACKAGE__->meta->make_immutable;
 no Moose;
 
