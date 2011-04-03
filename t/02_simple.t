@@ -3,7 +3,7 @@ use warnings;
 
 use Test::More;
 use FindBin;
-use lib "$FindBin::Bin/01_files/lib";
+use lib "$FindBin::Bin/02_files/lib";
 
 use App::Cache::Test;
 use Gentoo::MirrorList;
@@ -11,7 +11,7 @@ use Gentoo::MirrorList;
 my ($cache);
 
 BEGIN {
-  $cache = App::Cache::Test->new( mirror_file => "$FindBin::Bin/01_files/data/mirrors3.xml" );
+  $cache = App::Cache::Test->new( mirror_file => "$FindBin::Bin/02_files/data/mirrors3.xml" );
 }
 
 sub ml {
@@ -28,19 +28,19 @@ my @uris         = @{ ml->uri_list };
 my @protos       = @{ ml->proto_list };
 
 $t++;
-cmp_ok( scalar @countries, '==', 42, '42 Countries' );
+cmp_ok( scalar @countries, '==', 43, '43 Countries' );
 $t += scalar @countries;
 $t++;
-cmp_ok( scalar @countrynames, '==', 42, '42 CountryNames' );
+cmp_ok( scalar @countrynames, '==', 43, '43 CountryNames' );
 $t += scalar @countrynames;
 $t++;
 cmp_ok( scalar @regions, '==', 6, '6 Regions' );
 $t += scalar @regions;
 $t++;
-cmp_ok( scalar @mirrornames, '==', 123, '123 Mirror Names' );
+cmp_ok( scalar @mirrornames, '==', 135, '135 Mirror Names' );
 $t += scalar @mirrornames;
 $t++;
-cmp_ok( scalar @uris, '==', 259, '259 URI Names' );
+cmp_ok( scalar @uris, '==', 284, '284 URI Names' );
 $t += scalar @uris;
 $t++;
 cmp_ok( scalar @protos, '==', 3, '3 Protos' );

@@ -6,9 +6,13 @@ Revision history for {{$dist->name}}
  - Update toolchain
  - drop custom critic/kwalitee tests.
  - more critic rules to shut it up.
+ - Reorganised the tests dir.
  
  [Documentation]
  - Hack weaver.ini to fix generation issues.
+
+ [Tests]
+ - Duplicated and reworked 01_simple.t to 02_simple.t with a current copy of the mirror list.
 
 0.01000614 2009-11-14T17:12:09Z
  [Dependencies::Build]
