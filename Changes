@@ -7,9 +7,18 @@ Revision history for {{$dist->name}}
  - drop custom critic/kwalitee tests.
 
 0.01000614 2009-11-14T17:12:09Z
- - Dropped Data::Dump ( was hidden test dep )
- - added Mirror->find
- - no more EUMM
+ [Dependencies::Build]
+ - Adds Module::Build 0.35
+
+ [Features]
+ - Adds a ->file method to Mirror's to return the path to a file on a
+   mirror.
+
+ [Packaging]
+ - drop EUMM installer.
+
+ [Tests]
+ - Removed debug code  Data::Dump ( was hidden test dep )
 
 0.01000112 2009-11-09T15:29:43Z
  [Dependencies]
