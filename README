@@ -3,7 +3,7 @@ NAME
     Metadata
 
 VERSION
-    version 0.01052115
+    version 1.0.0
 
 SYNOPSIS
       my @mirrors = Gentoo::MirrorList->region('North America')->country('CA')->ipv4->all;

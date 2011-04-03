@@ -22,7 +22,7 @@ my %module_build_args = (
     'Kent Fredric <kentnl@cpan.org>'
   ],
   'dist_name' => 'Gentoo-MirrorList',
-  'dist_version' => '0.01052115',
+  'dist_version' => '1.0.0',
   'license' => 'perl',
   'module_name' => 'Gentoo::MirrorList',
   'recommends' => {},

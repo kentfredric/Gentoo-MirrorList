@@ -21,10 +21,10 @@ name: Gentoo-MirrorList
 provides:
   Gentoo::MirrorList:
     file: lib/Gentoo/MirrorList.pm
-    version: 0.01052115
+    version: v1.0.0
   Gentoo::MirrorList::Mirror:
     file: lib/Gentoo/MirrorList/Mirror.pm
-    version: 0.01052115
+    version: v1.0.0
 requires:
   App::Cache: 0
   Carp: 0
@@ -34,7 +34,7 @@ requires:
 resources:
   homepage: http://github.com/kentfredric/Gentoo-MirrorList/tree
   repository: git://github.com/kentfredric/Gentoo-MirrorList.git
-version: 0.01052115
+version: 1.0.0
 x_BuiltWith:
   modules:
     App::Cache: 0.37
@@ -60,22 +60,9 @@ x_BuiltWith:
 x_Dist_Zilla:
   plugins:
     -
-      class: Dist::Zilla::Plugin::AutoVersion::Relative
-      config:
-        Dist::Zilla::Plugin::AutoVersion::Relative:
-          format: "{{ sprintf('%d.%02d%04d%02d', $major, $minor, days, hours) }}"
-          major: 0
-          minor: 1
-          relative_to:
-            day: 08
-            hour: 16
-            minute: 0
-            month: 11
-            second: 0
-            time_zone: Pacific/Auckland
-            year: 2009
-      name: '@Author::KENTNL/AutoVersion::Relative'
-      version: 0.01037118
+      class: Dist::Zilla::Plugin::Git::NextVersion
+      name: '@Author::KENTNL/Git::NextVersion'
+      version: 1.110500
     -
       class: Dist::Zilla::Plugin::GatherDir
       name: '@Author::KENTNL/GatherDir'

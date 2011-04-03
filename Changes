@@ -1,5 +1,9 @@
 Revision history for Gentoo-MirrorList
 
+1.0.0 2011-04-03T19:25:50Z
+ [Packaging]
+ - Move to Git::NextVersion.
+
 0.01052115 2011-04-03T18:45:46Z
  [Dependencies]
  - Test::More is no longer a runtime dep.

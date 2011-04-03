@@ -3,7 +3,7 @@ use warnings;
 
 package Gentoo::MirrorList::Mirror;
 BEGIN {
-  $Gentoo::MirrorList::Mirror::VERSION = '0.01052115';
+  $Gentoo::MirrorList::Mirror::VERSION = '1.0.0';
 }
 
 # ABSTRACT: An objective representation of a single Gentoo mirror
@@ -108,7 +108,7 @@ Gentoo::MirrorList::Mirror - An objective representation of a single Gentoo mirr
 
 =head1 VERSION
 
-version 0.01052115
+version 1.0.0
 
 =head1 ATTRIBUTES
 
