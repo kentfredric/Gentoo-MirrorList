@@ -1,6 +1,12 @@
 Revision history for {{$dist->name}}
 
 {{$NEXT}}
+ [Packaging]
+ - Move to @Author::KENTNL
+ - Update toolchain
+ - drop custom critic/kwalitee tests.
+
+0.01000614 2009-11-14 17:12:09 UTC
           Dropped Data::Dump ( was hidden test dep )
           added Mirror->find
           no more EUMM
