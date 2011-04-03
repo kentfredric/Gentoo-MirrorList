@@ -25,6 +25,7 @@ Revision history for {{$dist->name}}
  - more critic rules to shut it up.
  - Reorganised the tests dir.
  - Ship .perltidyrc
+ - add .gitignore.
 
  [Tests]
  - Duplicated and reworked 01_simple.t to 02_simple.t with a current copy
