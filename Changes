@@ -1,6 +1,8 @@
 Revision history for {{$dist->name}}
 
 {{$NEXT}}
+
+1.0.0 2011-04-03T19:25:50Z
  [Packaging]
  - Move to Git::NextVersion.
 
