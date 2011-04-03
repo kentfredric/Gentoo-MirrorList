@@ -12,13 +12,27 @@ Revision history for {{$dist->name}}
  - no more EUMM
 
 0.01000112 2009-11-09T15:29:43Z
- - Redocumented With Pod::Weaver
- - Add Tests.
+ [Dependencies]
+ - Added Test::More 0.94
+
+ [Documentation]
+ - Redocumented With Pod::Weaver.
+
+ [Packaging]
  - Fixed MirrorList filters using regex processing.
 
+ [Tests]
+ - Add a test which does sample parsing and sanity checking of a sample xml
+   file.
+
 0.01000102 2009-11-09T05:03:10Z
- - Added some dependencies.  Me-- / Dzil++ # its too easy to make a working
-   dist without thinking
+ - Me-- / Dzil++ # its too easy to make a working dist without thinking.
+
+ [Dependencies]
+ - Add namespace::autoclean
+ - Add XML::Simple
+ - Add App::Cache
+ - Add Moose.
 
 0.01000101 2009-11-09T04:02:14Z
  - First version.
