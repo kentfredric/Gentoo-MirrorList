@@ -2,9 +2,9 @@ use strict;
 use warnings;
 
 package Gentoo::MirrorList::Mirror;
-our $VERSION = '0.01000614';
-
-
+BEGIN {
+  $Gentoo::MirrorList::Mirror::VERSION = '0.01052115';
+}
 
 # ABSTRACT: An objective representation of a single Gentoo mirror
 
@@ -108,7 +108,7 @@ Gentoo::MirrorList::Mirror - An objective representation of a single Gentoo mirr
 
 =head1 VERSION
 
-version 0.01000614
+version 0.01052115
 
 =head1 ATTRIBUTES
 
@@ -130,7 +130,7 @@ version 0.01000614
 
 =head2 partial
 
-=head1 METHODS
+=head1 PUBLIC METHODS
 
 =head2 country_match
 
@@ -179,11 +179,11 @@ Provide a file uri for file.
 
 =head1 AUTHOR
 
-  Kent Fredric <kentnl@cpan.org>
+Kent Fredric <kentnl@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2009 by Kent Fredric.
+This software is copyright (c) 2011 by Kent Fredric.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.

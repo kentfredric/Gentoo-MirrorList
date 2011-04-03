@@ -2,9 +2,9 @@ use strict;
 use warnings;
 
 package Gentoo::MirrorList;
-our $VERSION = '0.01000614';
-
-
+BEGIN {
+  $Gentoo::MirrorList::VERSION = '0.01052115';
+}
 
 # ABSTRACT: A programmatic way to access Gentoo.org Mirror Metadata
 
@@ -235,7 +235,7 @@ Gentoo::MirrorList - A programmatic way to access Gentoo.org Mirror Metadata
 
 =head1 VERSION
 
-version 0.01000614
+version 0.01052115
 
 =head1 SYNOPSIS
 
@@ -466,11 +466,11 @@ There is no explicit sort order, but it will likely resemble parse order
 
 =head1 AUTHOR
 
-  Kent Fredric <kentnl@cpan.org>
+Kent Fredric <kentnl@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2009 by Kent Fredric.
+This software is copyright (c) 2011 by Kent Fredric.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.

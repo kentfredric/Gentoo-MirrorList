@@ -3,7 +3,7 @@ NAME
     Metadata
 
 VERSION
-    version 0.01000614
+    version 0.01052115
 
 SYNOPSIS
       my @mirrors = Gentoo::MirrorList->region('North America')->country('CA')->ipv4->all;
@@ -191,10 +191,10 @@ PRIVATE METHODS
   _filter
   _unfilter
 AUTHOR
-      Kent Fredric <kentnl@cpan.org>
+    Kent Fredric <kentnl@cpan.org>
 
 COPYRIGHT AND LICENSE
-    This software is copyright (c) 2009 by Kent Fredric.
+    This software is copyright (c) 2011 by Kent Fredric.
 
     This is free software; you can redistribute it and/or modify it under
     the same terms as the Perl 5 programming language system itself.
