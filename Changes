@@ -1,18 +1,36 @@
 Revision history for {{$dist->name}}
 
 {{$NEXT}}
+ [Dependencies]
+ - Test::More is no longer a runtime dep.
+ - Carp is now a runtime Dep.
+
+ [Dependencies::Develop]
+ - Now adverties Dist::Zilla bundles as being useful for developing.
+
+ [Dependencies::Test]
+ - English.pm needed for testing.
+ - File::Find needed.
+ - File::Temp needed
+ - FindBin needed.
+ - Test::More 0.88 Needed.
+
+ [Documentation]
+ - Hack weaver.ini to fix generation issues.
+
  [Packaging]
  - Move to @Author::KENTNL
  - Update toolchain
  - drop custom critic/kwalitee tests.
  - more critic rules to shut it up.
  - Reorganised the tests dir.
- 
- [Documentation]
- - Hack weaver.ini to fix generation issues.
+ - Ship .perltidyrc
 
  [Tests]
- - Duplicated and reworked 01_simple.t to 02_simple.t with a current copy of the mirror list.
+ - Duplicated and reworked 01_simple.t to 02_simple.t with a current copy
+   of the mirror list.
+ - Added test plugins: DistMeta, EOL, Kwalitee, CPAN-Changes,
+   ReportVersions::Tiny
 
 0.01000614 2009-11-14T17:12:09Z
  [Dependencies::Build]
