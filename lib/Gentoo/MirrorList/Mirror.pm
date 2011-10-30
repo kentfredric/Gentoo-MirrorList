@@ -3,7 +3,10 @@ use warnings;
 
 package Gentoo::MirrorList::Mirror;
 BEGIN {
-  $Gentoo::MirrorList::Mirror::VERSION = '1.0.0';
+  $Gentoo::MirrorList::Mirror::AUTHORITY = 'cpan:KENTNL';
+}
+{
+  $Gentoo::MirrorList::Mirror::VERSION = '1.0.1';
 }
 
 # ABSTRACT: An objective representation of a single Gentoo mirror
@@ -102,67 +105,69 @@ no Moose;
 __END__
 =pod
 
+=encoding utf-8
+
 =head1 NAME
 
 Gentoo::MirrorList::Mirror - An objective representation of a single Gentoo mirror
 
 =head1 VERSION
 
-version 1.0.0
+version 1.0.1
 
 =head1 ATTRIBUTES
 
-=head2 country
+=head2 C<country>
 
-=head2 countryname
+=head2 C<countryname>
 
-=head2 region
+=head2 C<region>
 
-=head2 mirrorname
+=head2 C<mirrorname>
 
-=head2 uri
+=head2 C<uri>
 
-=head2 proto
+=head2 C<proto>
 
-=head2 ipv4
+=head2 C<ipv4>
 
-=head2 ipv6
+=head2 C<ipv6>
 
-=head2 partial
+=head2 C<partial>
 
 =head1 PUBLIC METHODS
 
-=head2 country_match
+=head2 C<country_match>
 
   ->country_match( 'str' )
   ->country_match(qr/str/)
 
-=head2 countryname_match
+=head2 C<countryname_match>
 
   ->countryname_match( 'str' )
   ->countryname_match(qr/str/)
 
-=head2 region_match
+=head2 C<region_match>
 
   ->region_match( 'str' )
   ->region_match(qr/str/)
 
-=head2 mirrorname_match
+=head2 C<mirrorname_match>
 
   ->mirrorname_match( 'str' )
   ->mirrornamename_match(qr/str/)
 
-=head2 uri_match
+=head2 C<uri_match>
 
   ->uri_match( 'str' )
   ->uri_match(qr/str/)
 
-=head2 proto_match
+=head2 C<proto_match>
 
   ->proto_match( 'str' )
   ->proto_match(qr/str/)
 
-=head2 property_match
+=head2 C<property_match>
 
 A Magic Method that matches given properties
 
@@ -171,7 +176,7 @@ A Magic Method that matches given properties
   ->property_match( 'ipv4', 1 )             # not ( 0 xor ipv4 )
   ->property_match( 'ipv6', 0 )             # not ( 0 xor ipv6 )
 
-=head2 file
+=head2 C<file>
 
 Provide a file uri for file.
 

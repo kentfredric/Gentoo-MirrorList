@@ -1,5 +1,7 @@
 use strict;
 use warnings;
+binmode *STDOUT, ':utf8';
+binmode *STDERR, ':utf8';
 
 use Test::More;
 use FindBin;
@@ -75,8 +77,8 @@ for (@protos) {
 }
 
 $t += 31;
-for ( 0 ... 30 ){
-  cmp_ok( scalar @{[ ml->country('AU')->random($_) ]}, '==', $_ , "Random list of $_ ");
+for ( 0 ... 30 ) {
+  cmp_ok( scalar @{ [ ml->country('AU')->random($_) ] }, '==', $_, "Random list of $_ " );
 }
 done_testing($t);
 

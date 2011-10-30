@@ -3,7 +3,10 @@ use warnings;
 
 package Gentoo::MirrorList;
 BEGIN {
-  $Gentoo::MirrorList::VERSION = '1.0.0';
+  $Gentoo::MirrorList::AUTHORITY = 'cpan:KENTNL';
+}
+{
+  $Gentoo::MirrorList::VERSION = '1.0.1';
 }
 
 # ABSTRACT: A programmatic way to access Gentoo.org Mirror Metadata
@@ -229,13 +232,15 @@ no Moose;
 __END__
 =pod
 
+=encoding utf-8
+
 =head1 NAME
 
 Gentoo::MirrorList - A programmatic way to access Gentoo.org Mirror Metadata
 
 =head1 VERSION
 
-version 1.0.0
+version 1.0.1
 
 =head1 SYNOPSIS
 
@@ -282,161 +287,161 @@ On filtered objects, the filtration that has been performed affects the output.
 
 =head1 FILTER METHODS
 
-=head2 country
+=head2 C<country>
 
   ..->country( 'AU' )->..
   ..->country( qr/AU/ )->..
 
 See also L</country_list>
 
-=head2 countryname
+=head2 C<countryname>
 
   ..->countryname( 'Australia' )->..
   ..->countryname( qr/Aus/ )->..
 
 See also L</countryname_list>
 
-=head2 region
+=head2 C<region>
 
   ..->region('North America')->..
   ..->region(qr/America/)->..
 
 See also L</region_list>
 
-=head2 mirrorname
+=head2 C<mirrorname>
 
   ..->mirrorname(qr/^a/i)->..
 
 See also L</mirrorname_list>
 
-=head2 uri
+=head2 C<uri>
 
   ..->uri(qr/gentoo/)->..
 
 See also L</uri_list>
 
-=head2 proto
+=head2 C<proto>
 
   ..->proto('http')->..
   ..->proto(qr/^.*tp$/)->..
 
 See also L</proto_list>
 
-=head2 ipv4
+=head2 C<ipv4>
 
   ..->ipv4( 1 )->..
   ..->ipv4( 0 )->..
 
-=head2 ipv6
+=head2 C<ipv6>
 
   ..->ipv6( 1 )->..
   ..->ipv6( 0 )->..
 
-=head2 partial
+=head2 C<partial>
 
   ..->partial( 1 )->..
   ..->partial( 0 )->..
 
-=head2 exclude_country
+=head2 C<exclude_country>
 
   ..->exclude_country(qr/^K/i)->..
   ..->exclude_country('AU')->..
 
 See also L</country_list>
 
-=head2 exclude_countryname
+=head2 C<exclude_countryname>
 
   ..->exclude_countryname(qr/America/i)->..
   ..->exclude_countryname('Australia')->..
 
 See also L</countryname_list>
 
-=head2 exclude_region
+=head2 C<exclude_region>
 
   ..->exclude_region(qr/Foo/)->..
   ..->exclude_region('Foo')->..
 
 See also L</region_list>
 
-=head2 exclude_mirrorname
+=head2 C<exclude_mirrorname>
 
   ..->exclude_mirrorname(qr/Bad/)->..
   ..->exclude_mirrorname('Bad')->..
 
 See also L</mirrorname_list>
 
-=head2 exclude_uri
+=head2 C<exclude_uri>
 
   ..->exclude_uri(qr/Bad\.ip/)->..
   ..->exclude_uri('Bad.ip')->..
 
 See also L</uri_list>
 
-=head2 exclude_proto
+=head2 C<exclude_proto>
 
   ..->exclude_proto(qr/sync/)->..
   ..->exclude_proto('rsync')->..
 
 See also L</proto_list>
 
-=head2 is_ipv4
+=head2 C<is_ipv4>
 
   ..->is_ipv4->..
 
-=head2 not_ipv4
+=head2 C<not_ipv4>
 
   ..->not_ipv4->..
 
-=head2 is_ipv6
+=head2 C<is_ipv6>
 
   ..->is_ipv6->..
 
-=head2 not_ipv6
+=head2 C<not_ipv6>
 
   ..->not_ipv6->..
 
-=head2 is_partial
+=head2 C<is_partial>
 
   ..->is_partial->..
 
-=head2 not_partial
+=head2 C<not_partial>
 
   ..->not_partial->..
 
 =head1 TERMINATOR LIST METHODS
 
-=head2 country_list
+=head2 C<country_list>
 
   my ( @foo ) = ...->country_list
 
-=head2 countryname_list
+=head2 C<countryname_list>
 
   my ( @foo ) = ...->countryname_list
 
-=head2 region_list
+=head2 C<region_list>
 
   my ( @foo ) = ...->region_list
 
-=head2 mirrorname_list
+=head2 C<mirrorname_list>
 
   my ( @foo ) = ...->mirrorname_list
 
-=head2 uri_list
+=head2 C<uri_list>
 
   my ( @foo ) = ...->uri_list
 
-=head2 proto_list
+=head2 C<proto_list>
 
   my ( @foo ) = ...->proto_list
 
 =head1 MIRROR LIST METHODS
 
-=head2 random
+=head2 C<random>
 
   my ( $mirror )  = ...->random()
   my ( @mirrors ) = ...->random( 10 );
 
-=head2 all
+=head2 C<all>
 
 returns all Mirrors in the current filtration.
 
@@ -444,25 +449,25 @@ There is no explicit sort order, but it will likely resemble parse order
 
 =head1 PRIVATE ATTRIBUTES
 
-=head2 _cache
+=head2 C<_cache>
 
-=head2 _data
+=head2 C<_data>
 
-=head2 _xml
+=head2 C<_xml>
 
 =head1 PRIVATE METHODS
 
-=head2 _normalise_mirrorgroup
+=head2 C<_normalise_mirrorgroup>
 
-=head2 __build_mirrorgroup
+=head2 C<__build_mirrorgroup>
 
-=head2 _build_data
+=head2 C<_build_data>
 
-=head2 _build__xml
+=head2 C<_build__xml>
 
-=head2 _filter
+=head2 C<_filter>
 
-=head2 _unfilter
+=head2 C<_unfilter>
 
 =head1 AUTHOR
 

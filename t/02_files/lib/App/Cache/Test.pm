@@ -35,7 +35,7 @@ sub set {
 sub get_url {
   my ( $self, $argzero ) = @_;
   if ( $argzero eq 'http://www.gentoo.org/main/en/mirrors3.xml' ) {
-    open ( my $fh, '<', $self->mirror_file ) or Carp::confess('Test File missing');
+    open( my $fh, '<', $self->mirror_file ) or Carp::confess('Test File missing');
     local $/ = undef;
     return scalar <$fh>;
   }
