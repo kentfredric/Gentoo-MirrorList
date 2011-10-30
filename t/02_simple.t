@@ -1,5 +1,7 @@
 use strict;
 use warnings;
+binmode *STDOUT, ':utf8';
+binmode *STDERR, ':utf8';
 
 use Test::More;
 use FindBin;

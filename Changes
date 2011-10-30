@@ -1,6 +1,24 @@
 Revision history for {{$dist->name}}
 
 {{$NEXT}}
+ - Maintenance Release
+
+ [Dependencies]
+ - removed: test requires english
+ - added: runtime requires perl 5.10
+ - added: runtime requires strict
+ - added: runtime requires warnings
+
+ [Packaging]
+ - Update LICENSE ( Indent, Address )
+ - author/release tests moved to xt/
+ - github uri's point to https://
+ - added x_authority to meta
+ - turn on -Encoding in POD
+ - C<> wrap method/attribute names in pod
+
+ [Tests]
+ - added: xt/release/minimum-version.t
 
 1.0.0 2011-04-03T19:25:50Z
  [Packaging]
