@@ -75,8 +75,8 @@ for (@protos) {
 }
 
 $t += 31;
-for ( 0 ... 30 ){
-  cmp_ok( scalar @{[ ml->country('AU')->random($_) ]}, '==', $_ , "Random list of $_ ");
+for ( 0 ... 30 ) {
+  cmp_ok( scalar @{ [ ml->country('AU')->random($_) ] }, '==', $_, "Random list of $_ " );
 }
 done_testing($t);
 

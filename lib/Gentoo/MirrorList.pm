@@ -60,7 +60,7 @@ On filtered objects, the filtration that has been performed affects the output.
 
 =cut
 
-=p_attr _cache
+=p_attr C<_cache>
 
 =cut
 
@@ -73,7 +73,7 @@ has _cache => (
   },
 );
 
-=p_attr _data
+=p_attr C<_data>
 
 =cut
 
@@ -85,7 +85,7 @@ has '_data' => (
   handles    => { _data_filter => 'grep', _data_iterate => 'map', _data_count => 'count', _data_shuffle => 'shuffle' },
 );
 
-=p_attr _xml
+=p_attr C<_xml>
 
 =cut
 
@@ -95,7 +95,7 @@ has '_xml' => (
   lazy_build => 1,
 );
 
-=p_method _normalise_mirrorgroup
+=p_method C<_normalise_mirrorgroup>
 
 =cut
 
@@ -112,7 +112,7 @@ sub _normalise_mirrorgroup {
   return $mirrorgroup;
 }
 
-=p_method __build_mirrorgroup
+=p_method C<__build_mirrorgroup>
 
 =cut
 
@@ -144,7 +144,7 @@ sub __build_mirrorgroup {
   return (@mirrors);
 }
 
-=p_method _build_data
+=p_method C<_build_data>
 
 =cut
 
@@ -168,7 +168,7 @@ sub _build__data {
   return \@rows;
 }
 
-=p_method _build__xml
+=p_method C<_build__xml>
 
 =cut
 
@@ -177,7 +177,7 @@ sub _build__xml {
   return $self->_cache->get_url('http://www.gentoo.org/main/en/mirrors3.xml');
 }
 
-=p_method _filter
+=p_method C<_filter>
 
 =cut
 
@@ -195,7 +195,7 @@ sub _filter {
   return $self;
 }
 
-=p_method _unfilter
+=p_method C<_unfilter>
 
 =cut
 
@@ -213,57 +213,57 @@ sub _unfilter {
   return $self;
 }
 
-=filter country
+=filter C<country>
 
   ..->country( 'AU' )->..
   ..->country( qr/AU/ )->..
 
 See also L</country_list>
 
-=filter countryname
+=filter C<countryname>
 
   ..->countryname( 'Australia' )->..
   ..->countryname( qr/Aus/ )->..
 
 See also L</countryname_list>
 
-=filter region
+=filter C<region>
 
   ..->region('North America')->..
   ..->region(qr/America/)->..
 
 See also L</region_list>
 
-=filter mirrorname
+=filter C<mirrorname>
 
   ..->mirrorname(qr/^a/i)->..
 
 See also L</mirrorname_list>
 
-=filter uri
+=filter C<uri>
 
   ..->uri(qr/gentoo/)->..
 
 See also L</uri_list>
 
-=filter proto
+=filter C<proto>
 
   ..->proto('http')->..
   ..->proto(qr/^.*tp$/)->..
 
 See also L</proto_list>
 
-=filter ipv4
+=filter C<ipv4>
 
   ..->ipv4( 1 )->..
   ..->ipv4( 0 )->..
 
-=filter ipv6
+=filter C<ipv6>
 
   ..->ipv6( 1 )->..
   ..->ipv6( 0 )->..
 
-=filter partial
+=filter C<partial>
 
   ..->partial( 1 )->..
   ..->partial( 0 )->..
@@ -281,42 +281,42 @@ for my $property (qw( country countryname region mirrorname uri proto ipv4 ipv6 
   );
 }
 
-=filter exclude_country
+=filter C<exclude_country>
 
   ..->exclude_country(qr/^K/i)->..
   ..->exclude_country('AU')->..
 
 See also L</country_list>
 
-=filter exclude_countryname
+=filter C<exclude_countryname>
 
   ..->exclude_countryname(qr/America/i)->..
   ..->exclude_countryname('Australia')->..
 
 See also L</countryname_list>
 
-=filter exclude_region
+=filter C<exclude_region>
 
   ..->exclude_region(qr/Foo/)->..
   ..->exclude_region('Foo')->..
 
 See also L</region_list>
 
-=filter exclude_mirrorname
+=filter C<exclude_mirrorname>
 
   ..->exclude_mirrorname(qr/Bad/)->..
   ..->exclude_mirrorname('Bad')->..
 
 See also L</mirrorname_list>
 
-=filter exclude_uri
+=filter C<exclude_uri>
 
   ..->exclude_uri(qr/Bad\.ip/)->..
   ..->exclude_uri('Bad.ip')->..
 
 See also L</uri_list>
 
-=filter exclude_proto
+=filter C<exclude_proto>
 
   ..->exclude_proto(qr/sync/)->..
   ..->exclude_proto('rsync')->..
@@ -336,27 +336,27 @@ for my $property (qw( country countryname region mirrorname uri proto )) {
   );
 }
 
-=filter is_ipv4
+=filter C<is_ipv4>
 
   ..->is_ipv4->..
 
-=filter not_ipv4
+=filter C<not_ipv4>
 
   ..->not_ipv4->..
 
-=filter is_ipv6
+=filter C<is_ipv6>
 
   ..->is_ipv6->..
 
-=filter not_ipv6
+=filter C<not_ipv6>
 
   ..->not_ipv6->..
 
-=filter is_partial
+=filter C<is_partial>
 
   ..->is_partial->..
 
-=filter not_partial
+=filter C<not_partial>
 
   ..->not_partial->..
 
@@ -381,27 +381,27 @@ for my $property (qw( ipv4 ipv6 partial )) {
   );
 }
 
-=terminator country_list
+=terminator C<country_list>
 
   my ( @foo ) = ...->country_list
 
-=terminator countryname_list
+=terminator C<countryname_list>
 
   my ( @foo ) = ...->countryname_list
 
-=terminator region_list
+=terminator C<region_list>
 
   my ( @foo ) = ...->region_list
 
-=terminator mirrorname_list
+=terminator C<mirrorname_list>
 
   my ( @foo ) = ...->mirrorname_list
 
-=terminator uri_list
+=terminator C<uri_list>
 
   my ( @foo ) = ...->uri_list
 
-=terminator proto_list
+=terminator C<proto_list>
 
   my ( @foo ) = ...->proto_list
 
@@ -420,7 +420,7 @@ for my $property (qw( country countryname region mirrorname uri proto )) {
   );
 }
 
-=mirrorlist random
+=mirrorlist C<random>
 
   my ( $mirror )  = ...->random()
   my ( @mirrors ) = ...->random( 10 );
@@ -439,7 +439,7 @@ sub random {
   return @out[ 0 .. $amt - 1 ];
 }
 
-=mirrorlist all
+=mirrorlist C<all>
 
 returns all Mirrors in the current filtration.
 

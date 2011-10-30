@@ -11,17 +11,17 @@ use namespace::autoclean;
 my %bools = ();
 my %strs  = ();
 
-=attr country
+=attr C<country>
 
-=attr countryname
+=attr C<countryname>
 
-=attr region
+=attr C<region>
 
-=attr mirrorname
+=attr C<mirrorname>
 
-=attr uri
+=attr C<uri>
 
-=attr proto
+=attr C<proto>
 
 =cut
 
@@ -36,11 +36,11 @@ for (qw(  country countryname region mirrorname uri proto )) {
   $strs{$_} = 1;
 }
 
-=attr ipv4
+=attr C<ipv4>
 
-=attr ipv6
+=attr C<ipv6>
 
-=attr partial
+=attr C<partial>
 
 =cut
 
@@ -49,32 +49,32 @@ for (qw( ipv4 ipv6 partial )) {
   $bools{$_} = 1;
 }
 
-=method country_match
+=method C<country_match>
 
   ->country_match( 'str' )
   ->country_match(qr/str/)
 
-=method countryname_match
+=method C<countryname_match>
 
   ->countryname_match( 'str' )
   ->countryname_match(qr/str/)
 
-=method region_match
+=method C<region_match>
 
   ->region_match( 'str' )
   ->region_match(qr/str/)
 
-=method mirrorname_match
+=method C<mirrorname_match>
 
   ->mirrorname_match( 'str' )
   ->mirrornamename_match(qr/str/)
 
-=method uri_match
+=method C<uri_match>
 
   ->uri_match( 'str' )
   ->uri_match(qr/str/)
 
-=method proto_match
+=method C<proto_match>
 
   ->proto_match( 'str' )
   ->proto_match(qr/str/)
@@ -100,7 +100,7 @@ around BUILDARGS => sub {
   return $class->$orig(@args);
 };
 
-=method property_match
+=method C<property_match>
 
 A Magic Method that matches given properties
 
@@ -141,7 +141,7 @@ sub property_match {
   }
 }
 
-=method file
+=method C<file>
 
 Provide a file uri for file.
 
