@@ -40,7 +40,7 @@ resources:
 version: 1.0.2
 x_BuiltWith:
   modules:
-    App::Cache: 'NA(possibly not installed)'
+    App::Cache: 0.37
     Carp: 1.28
     Dist::Zilla::PluginBundle::Author::KENTNL: 1.7.2
     Dist::Zilla::PluginBundle::Author::KENTNL::Lite: 'NA(possibly not installed)'
@@ -54,7 +54,7 @@ x_BuiltWith:
     Test::More: 0.98
     Test::Pod: 1.46
     Test::Pod::Coverage: 1.08
-    XML::Simple: 'NA(possibly not installed)'
+    XML::Simple: 2.20
     namespace::autoclean: 0.13
     perl: 'NA(skipped: perl)'
     strict: 1.07
