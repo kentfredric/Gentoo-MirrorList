@@ -153,7 +153,7 @@ sub file {
   my ( $self, $file ) = @_;
   my $uri = $self->uri;
   $file =~ s{^\/}{};
-  $uri  =~ s{\/$}{};
+  $uri =~ s{\/$}{};
 
   return sprintf '%s/%s', $uri, $file;
 }
